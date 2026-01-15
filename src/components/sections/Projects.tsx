@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 
 const projects = [
   {
@@ -8,88 +10,165 @@ const projects = [
     description: "Modern online store with seamless checkout experience and responsive design.",
     tag: "Web",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+    color: "from-blue-500/20 to-purple-500/20"
   },
   {
     title: "Brand Promo Video",
     description: "High-energy promotional video for a tech startup launch campaign.",
     tag: "Video",
     image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&h=400&fit=crop",
+    color: "from-orange-500/20 to-red-500/20"
   },
   {
     title: "Portfolio Website",
     description: "Minimalist portfolio for a creative professional showcasing their work.",
     tag: "Web",
     image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&h=400&fit=crop",
+    color: "from-green-500/20 to-teal-500/20"
   },
   {
     title: "YouTube Content Series",
     description: "Engaging video edits for a growing YouTube channel with 100K+ subscribers.",
     tag: "Video",
     image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&h=400&fit=crop",
+    color: "from-red-500/20 to-pink-500/20"
   },
   {
     title: "SaaS Landing Page",
     description: "Conversion-optimized landing page with animations and modern aesthetics.",
     tag: "Web",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    color: "from-violet-500/20 to-indigo-500/20"
   },
   {
     title: "Social Media Reels",
     description: "Trendy short-form video content for Instagram and TikTok campaigns.",
     tag: "Video",
     image: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=600&h=400&fit=crop",
+    color: "from-pink-500/20 to-rose-500/20"
   },
 ];
 
+const filters = ["All", "Web", "Video"];
+
 const Projects = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredProjects = activeFilter === "All" 
+    ? projects 
+    : projects.filter(p => p.tag === activeFilter);
+
   return (
-    <section id="projects" className="py-24 px-4">
-      <div className="container max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            A selection of work that showcases my skills and passion for digital creation.
-          </p>
-        </div>
+    <section id="projects" className="py-32 px-4 relative overflow-hidden">
+      <div className="container max-w-6xl mx-auto" ref={ref}>
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div>
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20">
+              Featured Work
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+              Projects that <span className="text-primary">speak</span>
+            </h2>
+          </div>
+          
+          {/* Filter buttons */}
+          <div className="flex gap-2">
+            {filters.map((filter) => (
+              <motion.button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeFilter === filter
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {filter}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <Card 
-              key={project.title} 
-              className="group overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          layout
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${
-                  project.tag === "Web" 
-                    ? "bg-primary text-primary-foreground" 
-                    : "bg-foreground/90 text-background"
-                }`}>
-                  {project.tag}
-                </span>
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                <Button variant="outline" size="sm" className="w-full">
-                  View Project
-                  <ExternalLink className="ml-2 w-4 h-4" />
-                </Button>
-              </CardContent>
-            </Card>
+              <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-elevated cursor-pointer">
+                <div className="relative overflow-hidden">
+                  <motion.div 
+                    className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10`}
+                  />
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-56 object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                  <span className={`absolute top-4 left-4 z-20 px-3 py-1.5 rounded-full text-xs font-semibold ${
+                    project.tag === "Web" 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-foreground text-background"
+                  }`}>
+                    {project.tag}
+                  </span>
+                  
+                  {/* Hover overlay */}
+                  <motion.div 
+                    className="absolute inset-0 bg-foreground/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+                    initial={false}
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileHover={{ scale: 1.1 }}
+                      className="w-14 h-14 rounded-full bg-primary flex items-center justify-center"
+                    >
+                      <ArrowUpRight className="w-6 h-6 text-primary-foreground" />
+                    </motion.div>
+                  </motion.div>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {project.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+        
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Button variant="outline" size="lg" className="group">
+            View All Projects
+            <ExternalLink className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
