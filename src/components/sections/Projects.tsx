@@ -6,46 +6,20 @@ import { useRef, useState } from "react";
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "Modern online store with seamless checkout experience and responsive design.",
+    title: "Shakti AI",
+    description: "AI-powered platform with modern design and seamless user experience.",
     tag: "Web",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-    color: "from-blue-500/20 to-purple-500/20"
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+    color: "from-violet-500/20 to-indigo-500/20",
+    link: "https://shaktiai.vercel.app/"
   },
   {
-    title: "Brand Promo Video",
-    description: "High-energy promotional video for a tech startup launch campaign.",
+    title: "Video Edits & Reels",
+    description: "Professional video editing, motion graphics, and social media content.",
     tag: "Video",
     image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&h=400&fit=crop",
-    color: "from-orange-500/20 to-red-500/20"
-  },
-  {
-    title: "Portfolio Website",
-    description: "Minimalist portfolio for a creative professional showcasing their work.",
-    tag: "Web",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&h=400&fit=crop",
-    color: "from-green-500/20 to-teal-500/20"
-  },
-  {
-    title: "YouTube Content Series",
-    description: "Engaging video edits for a growing YouTube channel with 100K+ subscribers.",
-    tag: "Video",
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&h=400&fit=crop",
-    color: "from-red-500/20 to-pink-500/20"
-  },
-  {
-    title: "SaaS Landing Page",
-    description: "Conversion-optimized landing page with animations and modern aesthetics.",
-    tag: "Web",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-    color: "from-violet-500/20 to-indigo-500/20"
-  },
-  {
-    title: "Social Media Reels",
-    description: "Trendy short-form video content for Instagram and TikTok campaigns.",
-    tag: "Video",
-    image: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=600&h=400&fit=crop",
-    color: "from-pink-500/20 to-rose-500/20"
+    color: "from-pink-500/20 to-rose-500/20",
+    link: "https://www.instagram.com/prateek.fx/"
   },
 ];
 
@@ -120,49 +94,51 @@ const Projects = () => {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-elevated cursor-pointer">
-                <div className="relative overflow-hidden">
-                  <motion.div 
-                    className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10`}
-                  />
-                  <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-56 object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                  <span className={`absolute top-4 left-4 z-20 px-3 py-1.5 rounded-full text-xs font-semibold ${
-                    project.tag === "Web" 
-                      ? "bg-primary text-primary-foreground" 
-                      : "bg-foreground text-background"
-                  }`}>
-                    {project.tag}
-                  </span>
-                  
-                  {/* Hover overlay */}
-                  <motion.div 
-                    className="absolute inset-0 bg-foreground/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
-                    initial={false}
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <Card className="group overflow-hidden border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-elevated cursor-pointer">
+                  <div className="relative overflow-hidden">
+                    <motion.div 
+                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10`}
+                    />
+                    <motion.img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-56 object-cover"
                       whileHover={{ scale: 1.1 }}
-                      className="w-14 h-14 rounded-full bg-primary flex items-center justify-center"
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                    <span className={`absolute top-4 left-4 z-20 px-3 py-1.5 rounded-full text-xs font-semibold ${
+                      project.tag === "Web" 
+                        ? "bg-primary text-primary-foreground" 
+                        : "bg-foreground text-background"
+                    }`}>
+                      {project.tag}
+                    </span>
+                    
+                    {/* Hover overlay */}
+                    <motion.div 
+                      className="absolute inset-0 bg-foreground/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+                      initial={false}
                     >
-                      <ArrowUpRight className="w-6 h-6 text-primary-foreground" />
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        whileHover={{ scale: 1.1 }}
+                        className="w-14 h-14 rounded-full bg-primary flex items-center justify-center"
+                      >
+                        <ArrowUpRight className="w-6 h-6 text-primary-foreground" />
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                </CardContent>
-              </Card>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {project.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </a>
             </motion.div>
           ))}
         </motion.div>
