@@ -82,7 +82,7 @@ const CTA = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Button variant="hero" size="lg" className="group" asChild>
-                <a href="mailto:hello@prateekmaurya.com">
+                <a href="tel:+916264638602">
                   <Sparkles className="mr-2 w-5 h-5" />
                   Get in Touch
                   <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
