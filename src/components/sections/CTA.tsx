@@ -9,6 +9,15 @@ const CTA = () => {
 
   return (
     <section id="contact" className="py-32 px-4 relative overflow-hidden">
+      {/* Grainy texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.35] dark:opacity-[0.25]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'overlay'
+        }}
+      />
       <div className="container max-w-5xl mx-auto" ref={ref}>
         <motion.div 
           className="relative bg-card rounded-[2.5rem] p-12 md:p-20 text-center shadow-elevated border border-border/50 overflow-hidden"
@@ -46,14 +55,14 @@ const CTA = () => {
             </motion.div>
             
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               Have a project
               <br />
-              <span className="text-primary">in mind?</span>
+              <span className="text-primary italic">in mind?</span>
             </motion.h2>
             
             <motion.p 

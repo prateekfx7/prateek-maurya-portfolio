@@ -62,6 +62,15 @@ const Services = () => {
 
   return (
     <section id="services" className="py-32 px-4 relative overflow-hidden">
+      {/* Grainy texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.35] dark:opacity-[0.25]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'overlay'
+        }}
+      />
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30 -z-10" />
       
@@ -75,8 +84,8 @@ const Services = () => {
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20">
             What I Do
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Services tailored for <span className="text-primary">your success</span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+            Services tailored for <span className="text-primary italic">your success</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Comprehensive digital solutions to help your brand thrive in the modern landscape.

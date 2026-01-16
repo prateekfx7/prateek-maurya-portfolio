@@ -46,6 +46,15 @@ const HowItWorks = () => {
 
   return (
     <section className="py-32 px-4 relative overflow-hidden bg-muted/30">
+      {/* Grainy texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.35] dark:opacity-[0.25]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'overlay'
+        }}
+      />
       <div className="container max-w-6xl mx-auto" ref={containerRef}>
         <motion.div 
           className="text-center mb-20"
@@ -56,8 +65,8 @@ const HowItWorks = () => {
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20">
             Process
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            How we <span className="text-primary">work together</span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
+            How we <span className="text-primary italic">work together</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A simple, transparent process designed to bring your vision to life efficiently.
