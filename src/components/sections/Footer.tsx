@@ -18,12 +18,21 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="py-16 px-4 border-t border-border/50 bg-muted/20">
-      <div className="container max-w-6xl mx-auto">
+    <footer className="py-16 px-4 border-t border-border/50 bg-muted/20 relative overflow-hidden">
+      {/* Grainy texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-[0.35] dark:opacity-[0.25]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'overlay'
+        }}
+      />
+      <div className="container max-w-6xl mx-auto relative z-10">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <a href="#" className="text-2xl font-bold text-foreground inline-block mb-4">
+            <a href="#" className="text-2xl font-display font-bold text-foreground inline-block mb-4">
               Prateek<span className="text-primary">.</span>
             </a>
             <p className="text-muted-foreground leading-relaxed mb-6">

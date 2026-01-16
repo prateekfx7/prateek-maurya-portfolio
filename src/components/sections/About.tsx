@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { User, Target, Zap } from "lucide-react";
+import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const About = () => {
   const ref = useRef(null);
@@ -26,6 +27,15 @@ const About = () => {
 
   return (
     <section id="about" className="py-32 px-4 relative overflow-hidden">
+      {/* Grainy texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.35] dark:opacity-[0.25]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'overlay'
+        }}
+      />
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/30 to-transparent -z-10" />
       
@@ -41,9 +51,9 @@ const About = () => {
             <div className="relative">
               <div className="bg-card rounded-3xl p-8 shadow-card border border-border/50">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop&crop=face"
+                  src={profilePhoto}
                   alt="Prateek Maurya"
-                  className="w-full h-80 object-cover rounded-2xl"
+                  className="w-full h-96 object-cover object-top rounded-2xl"
                 />
               </div>
               
@@ -68,14 +78,14 @@ const About = () => {
             </motion.span>
             
             <motion.h2
-              className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight"
+              className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               Crafting digital
               <br />
-              <span className="text-primary">experiences</span> that matter
+              <span className="text-primary italic">experiences</span> that matter
             </motion.h2>
             
             <motion.p

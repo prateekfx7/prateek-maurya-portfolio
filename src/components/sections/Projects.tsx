@@ -62,6 +62,15 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-32 px-4 relative overflow-hidden">
+      {/* Grainy texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.35] dark:opacity-[0.25]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          mixBlendMode: 'overlay'
+        }}
+      />
       <div className="container max-w-6xl mx-auto" ref={ref}>
         <motion.div 
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
@@ -73,8 +82,8 @@ const Projects = () => {
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 border border-primary/20">
               Featured Work
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">
-              Projects that <span className="text-primary">speak</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground">
+              Projects that <span className="text-primary italic">speak</span>
             </h2>
           </div>
           

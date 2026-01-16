@@ -75,7 +75,7 @@ const Navbar = () => {
             >
               <Link 
                 to="/" 
-                className="text-xl font-bold text-foreground relative z-10 flex items-center gap-1"
+                className="text-xl font-display font-bold text-foreground relative z-10 flex items-center gap-1"
               >
                 <span className="bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">Prateek</span>
                 <span className="text-primary text-2xl">.</span>
